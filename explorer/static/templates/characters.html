@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+     <link rel="stylesheet" href="{% static 'css/loadMore.css' %}">
+{% endblock %}
 
 {% block body_content %}
     <div class="container">
@@ -13,7 +18,7 @@
             </thead>
             <tbody>
                 {% for character in characters %}
-                <tr scope="row">
+                <tr class="char" scope="row">
                     {% for field in character %}
                     <td>{{field}}</td>
                     {% endfor %}
@@ -21,15 +26,14 @@
                 {% endfor %}
             </tbody>
         </table>
-        <!--<ul class="list-group">
-            {% for character in characters %}
-            <li class="list-group-item">
-                <a href="/{{data_set.filename}}">
-                    {{data_set.timestamp}}
-                </a>
-            </li>
-            {% endfor %}
-        </ul>-->
+        <a href="#" id="loadMore">Load More</a>
+        <a href="#top">Back to top</a>
         {% endblock %}
     </div>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'js/loadMore.js' %}"></script>
 {% endblock %}
