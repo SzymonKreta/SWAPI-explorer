@@ -2,6 +2,8 @@ import os
 import hashlib
 
 from django.views import View
+from django.http import HttpResponse
+from django.template import Context, loader
 from django.shortcuts import render
 
 import requests as req
@@ -14,11 +16,10 @@ from explorer.settings import MEDIA_ROOT
 
 class Home(View):
     template_name = 'home.html'
-    paginate_by = 20
     http_method_names = ['get', 'post']
 
     def get(self, request):
-        data_sets = DataSet.objects.all()
+        data_sets = DataSet.objects.all().order_by('-pk')
         return render(request, self.template_name, {'data_sets': data_sets})
 
     def post(self, request):
@@ -37,5 +38,12 @@ class Home(View):
         return render(request, self.template_name, {'data_sets': data_sets})
 
 
+class SingleSet(View):
+    template_name = 'characters.html'
 
+    def get(self, request, filename):
+        table = etl.fromcsv(os.path.join(MEDIA_ROOT, filename))
+        characters = etl.listoftuples(table)
+        return render(request, self.template_name, {'headers': characters[0],
+                                                    'characters': characters[1:]})
 

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block body_content %}
+    <div class="container">
+        {% block container %}
+        <table class="table">
+            <thead>
+                <tr scope="col">
+                    {% for header in headers %}
+                    <th>{{header}}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for character in characters %}
+                <tr scope="row">
+                    {% for field in character %}
+                    <td>{{field}}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!--<ul class="list-group">
+            {% for character in characters %}
+            <li class="list-group-item">
+                <a href="/{{data_set.filename}}">
+                    {{data_set.timestamp}}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>-->
+        {% endblock %}
+    </div>
+{% endblock %}
