@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'explorer.urls'
+ROOT_URLCONF = 'SWAPI-explorer.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'explorer.wsgi.application'
+WSGI_APPLICATION = 'SWAPI-explorer_bak.wsgi.application'
 
 
 # Database
