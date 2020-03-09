@@ -14,11 +14,12 @@
 
     <div class="container">
         {% block container %}
-        <table class="table">
+        <table class="table" id="table">
             <tr>
                 {% for header in headers %}
                 <th class="{{ header }}">{{header}}</th>
                 {% endfor %}
+                <th class="counter">Counter</th>
             </tr>
             <tbody>
                 {% for character in characters %}
@@ -26,6 +27,7 @@
                     {% for header, field in headers|zip:character %}
                     <td class="{{ header }}">{{field}}</td>
                     {% endfor %}
+                    <td id="counter"></td>
                 </tr>
                 {% endfor %}
             </tbody>

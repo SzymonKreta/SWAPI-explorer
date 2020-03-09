@@ -1,4 +1,3 @@
-import datetime
 import hashlib
 import os
 
@@ -60,10 +59,8 @@ class Home(View):
         filename = hashlib.md5().hexdigest() + '.csv'
         table = etl.fromdicts(characters)
         etl.tocsv(table, os.path.join(MEDIA_ROOT, filename))
-
-        filename = DataSet.objects.latest('timestamp').filename
         DataSet.objects.create(filename=filename)
-        data_sets = DataSet.objects.all()
+        data_sets = DataSet.objects.all().order_by('-pk')
         return render(request, self.template_name, {'data_sets': data_sets})
 
 
