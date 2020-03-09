@@ -1,26 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load explorer_extras %}
 
 {% block extra_css %}
      <link rel="stylesheet" href="{% static 'css/loadMore.css' %}">
 {% endblock %}
 
 {% block body_content %}
+
+    {% for header in headers %}
+        <input class="btn btn-primary toggler" type="button" value="{{ header }}"/>
+    {% endfor %}
+
     <div class="container">
         {% block container %}
         <table class="table">
-            <thead>
-                <tr scope="col">
-                    {% for header in headers %}
-                    <th>{{header}}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
+            <tr>
+                {% for header in headers %}
+                <th class="{{ header }}">{{header}}</th>
+                {% endfor %}
+            </tr>
             <tbody>
                 {% for character in characters %}
                 <tr class="char" scope="row">
-                    {% for field in character %}
-                    <td>{{field}}</td>
+                    {% for header, field in headers|zip:character %}
+                    <td class="{{ header }}">{{field}}</td>
                     {% endfor %}
                 </tr>
                 {% endfor %}
@@ -36,4 +40,5 @@
 {% block extra_js %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="{% static 'js/loadMore.js' %}"></script>
+    <script src="{% static 'js/filter.js' %}"></script>
 {% endblock %}

@@ -2,3 +2,5 @@ django
 requests
 petl
 psycopg2
+flake8
+isort
