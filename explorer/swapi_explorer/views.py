@@ -1,5 +1,5 @@
-import hashlib
 import os
+import uuid
 
 import petl as etl
 import requests as req
@@ -56,7 +56,7 @@ class Home(View):
             planets.extend(resp['results'])
         self.planets = {planet['url']: planet['name'] for planet in planets}
         characters = [self.parse_character(character) for character in characters]
-        filename = hashlib.md5().hexdigest() + '.csv'
+        filename = uuid.uuid4().hex + '.csv'
         table = etl.fromdicts(characters)
         etl.tocsv(table, os.path.join(MEDIA_ROOT, filename))
         DataSet.objects.create(filename=filename)
